@@ -2,6 +2,35 @@
     box-sizing: border-box;
   }
   
+  @-webkit-keyframes rainbow {
+    0% {
+      background-image: linear-gradient(to top, #810899 0%, #17111f 100%);
+    }
+    33%{
+      background-image: linear-gradient(to top, #2c35b9 0%, #810899 100%);
+    }
+    66%{
+      background-image: linear-gradient(to top, #17111f 0%, #2c35b9 100%);
+    }
+    100% {
+      background-image: linear-gradient(to top, #810899 0%, #17111f 100%);
+    }
+  }
+  @keyframes rainbow {
+    0% {
+      background-image: linear-gradient(to top, #810899 0%, #17111f 100%);
+    }
+    33%{
+      background-image: linear-gradient(to top, #2c35b9 0%, #810899 100%);
+    }
+    66%{
+      background-image: linear-gradient(to top, #17111f 0%, #2c35b9 100%);
+    }
+    100% {
+      background-image: linear-gradient(to top, #810899 0%, #17111f 100%);
+    }
+  }
+
   @-webkit-keyframes scrollGood {
     0% {
       -webkit-transform: translate3d(0, 0, 0);
@@ -62,6 +91,10 @@
   @-webkit-keyframes scrollZ {
     0% {
       transform: translateZ(0px);
+      opacity: 0;
+    }
+    5%{
+      opacity: 1;
     }
     100% {
       transform: translateZ(-750px);
@@ -72,16 +105,45 @@
   }
   @keyframes scrollZ {
     0% {
-      transform: translateY(140px) translateZ(-1000px);
+      transform: translateY(150px) translateZ(-1000px);
+      opacity: 0;
+    }
+    5%{
+      opacity: 1;
     }
     100%{
-      transform: translateY(-180px) translateZ(1000px) translateX(50px);
+      transform: translateY(-200px) translateZ(1000px) translateX(0px);
     }
     // 100% {
     //   transform: translateY(-180px) translateZ(1000px) translateX(50px);
     // }
   }
 
+
+  @-webkit-keyframes scrollZ2 {
+    0% {
+      transform: translateZ(0px);
+      opacity: 0;
+    }
+    5%{
+      opacity: 1;
+    }
+    100% {
+      transform: translateZ(-750px);
+    }
+  }
+  @keyframes scrollZ2 {
+    0% {
+      transform: translateY(150px) translateZ(-1000px);
+      opacity: 0;
+    }
+    5%{
+      opacity: 1;
+    }
+    100%{
+      transform: translateY(-200px) translateZ(1000px) translateX(0px);
+    }
+  }
   @-webkit-keyframes scrollLeft {
     0% {
       background-position: 0 0;
@@ -98,21 +160,51 @@
       background-position: 512px 0;
     }
   }
+  @keyframes bounce{
+    0%{
+      top: 10px;
+    }
+    50%{
+      top: 20px;
+    }
+    100%{
+      top: 10px;
+    }
+  }
   
   #scene{
     position: relative;
     perspective: 400px;
     overflow:hidden;
     height: 100vh;
+    .sun{
+      -webkit-clip-path: circle(50.0% at 50% 50%);
+      clip-path: circle(50.0% at 50% 50%);
+      background-image: linear-gradient(to top, #ff4444 0%,  rgb(228, 73, 26) 100%);
+      background-color: rgb(228, 73, 26);
+      position:absolute;
+      top: 10px;
+      left: 10%;
+      right: 0;
+      height: 256px;
+      width: 256px;
+      animation: bounce 10s ease infinite;
+    }
     .container{
       position: absolute;
       width: 100%;
       top: 0;
       .block{
-        width: 60em;
+        max-width: 60em;
         margin: 0 auto;
         text-align:center;
       }
+    }
+    #create{
+      position:fixed;
+      top:10px;
+      right:10px;
+      z-index: 10;
     }
     .ground{
       position:relative;
@@ -124,15 +216,30 @@
         display:block;
         height: 130px;
         width: 130px;
-        background-image: url('../assets/bullet.png');
+        background-image: url('../assets/palmtree.png');
         background-size:contain;
         background-repeat: no-repeat;
         opacity: 1;
         top:50%;
-        left: 50%;
+        right: 20%;
         transition: all .2s;
-        -webkit-animation: scrollZ 3s ease-in infinite;
-        animation: scrollZ 3s ease-in infinite;
+        -webkit-animation: scrollZ 10s linear infinite;
+        animation: scrollZ 10s linear infinite;
+      }
+      .object2{
+        position: absolute;
+        display:block;
+        height: 130px;
+        width: 130px;
+        background-image: url('../assets/palmtree2.png');
+        background-size:contain;
+        background-repeat: no-repeat;
+        opacity: 1;
+        top:50%;
+        left: 25%;
+        transition: all .2s;
+        -webkit-animation: scrollZ2 10s linear infinite;
+        animation: scrollZ2 10s linear infinite;
       }
       .floor{
         display:block;
@@ -144,23 +251,28 @@
         background-size: 128px;
         background-repeat: repeat;
         transform: translateY(100px) rotateX(100deg) scaleX(4) scaleY(4);
-        -webkit-animation: scrollForward 5s linear infinite;
-        animation: scrollForward 5s linear infinite;
+        -webkit-animation: scrollForward 10s linear infinite;
+        animation: scrollForward 10s linear infinite;
       }
       .backDrop1{
         position:absolute;
         display:block;
-        background: red;
+        background: url('../assets/tese.png');
+        background-size:256px;
+        background-repeat: repeat-x;
+        -webkit-animation: scrollLeft 60s linear infinite;
+        animation: scrollLeft 60s linear infinite;
         opacity: 1;
-        transform: translateZ(-1000px) scaleX(4);
-        height: 100%;
+        transform: translateZ(-1000px) translateY(350px) scaleX(4);
+        height: 208px;
         width:100%;
-        display:block;
       }
     }
   }
   body{
-    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    
+    background-image: linear-gradient(to top, #810899 0%, #17111f 100%);
+    //background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
   }
   .pen {
     background-color: blue;
@@ -213,13 +325,13 @@
       animation: scrollGood2 5s linear infinite;
     }  
   }
-  h1 {
-    font-weight: 400;
-    font-family: sans-serif;
-    margin: 0;
-    position: relative;
-    z-index: 2;
-    color: white;
-  }
+ 
 }
-  
+h1 {
+  font-weight: 400;
+  font-family: sans-serif;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  color: white;
+} 
